@@ -1,4 +1,4 @@
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+  [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
 TalisMan - Trusted Algebraic LInearization of Sub-Circuits with Matrix-based Algorithms using Normalforms
 ================================================================================
@@ -16,25 +16,23 @@ In Proc. 31st Intl. Conference on Principles and Practice of Constraint Programm
   
 ----------------------------------------------------------------  
   
+# Dependencies:  
+`libgmp` (https://gmplib.org/)  
+              `lflint` (https://flintlib.org/)  
+              `lkissat` (https://github.com/arminbiere/kissat)  
 
+Additionally you need to download the Eigen library from https://gitlab.com/libeigen/eigen and copy the contents of the folder `Eigen` into the respective folder of src/.
 
-### Installation ###
-
-Dependencies: `libgmp` (https://gmplib.org/)
-              `lflint` (https://flintlib.org/)
-              `lkissat` (https://github.com/arminbiere/kissat)
-
-              Additionally you need to download the Eigen library from https://gitlab.com/libeigen/eigen and copy the contents of the folder `Eigen` into the respective folder of src/.
-
+# Installation 
 
 Use `./configure.sh && make` to configure and build `TalisMan 1.0`.
 
 
-### USAGE ###
-usage : talisman <input file> <spec-mode> [proof-logging] [options] 
+# Usage 
+    talisman <input file> <spec-mode> [proof-logging] [options] 
 
-General Help
-------------
+ General Help
+ ------------
     -h | --help           Displays usage information and exits.
 
 
@@ -53,25 +51,24 @@ Specifications <spec-mode>
     Note: Only one specification can be selected. Attempting to select multiple specs will result in an error.
 
 
-ADDITIONAL OPTIONS
 Counter-Example Generation
 --------------------------
-  -nce | --no-counter-examples     Disables counter-example generation in case of incorrect circuit.
+    -nce | --no-counter-examples     Disables counter-example generation in case of incorrect circuit.
 
 Sub-Circuit size
 --------------------------
-  -f <int>                         Non-negative value for fanout size, 0 turns fanout limit off (default value: 4).
-  -d <int>                         Positive value for depth (default: 2).
+    -f <int>                         Non-negative value for fanout size, 0 turns fanout limit off (default value: 4).
+    -d <int>                         Positive value for depth (default: 2).
 
 Ablation
 --------------------------
-  -npp  | --no-preprocessing        Disables the preprocessing phase. (no rewriting of AIG).
-  -nvc  | --no-vanishing            Turns on vanishing constraints 
-  -nch  | --no-caching              Turns off caching of circuits 
-  -dll  | --do-local-linearization  Enables the local linearization and only uses FGLM to linearize.
-  -alg  | --algebraic-reduction     Use algebraic reductions instead of SAT in guess and proof
-  -gap  | --force-guessing          Forces the linearization to only use guess-and-proof
-  -fglm | --force-fglm              Forces the linearization to only use fglm
+    -npp  | --no-preprocessing        Disables the preprocessing phase. (no rewriting of AIG).
+    -nvc  | --no-vanishing            Turns on vanishing constraints 
+    -nch  | --no-caching              Turns off caching of circuits 
+    -dll  | --do-local-linearization  Enables the local linearization and only uses FGLM to linearize.
+    -alg  | --algebraic-reduction     Use algebraic reductions instead of SAT in guess and proof
+    -gap  | --force-guessing          Forces the linearization to only use guess-and-proof
+    -fglm | --force-fglm              Forces the linearization to only use fglm
 
 
 Verbosity Levels
