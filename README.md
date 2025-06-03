@@ -18,6 +18,7 @@ In Proc. 31st Intl. Conference on Principles and Practice of Constraint Programm
 # Dependencies:  
 `libgmp` (https://gmplib.org/)  
               `lflint` (https://flintlib.org/)  
+              `lpb` (https://github.com/master-keying/pblib)  
               `lkissat` (https://github.com/arminbiere/kissat)  
 
 # Installation 
