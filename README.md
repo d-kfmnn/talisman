@@ -2,7 +2,7 @@
 TalisMan - Trusted Algebraic LInearization of Sub-Circuits with Matrix-based Algorithms using Normalforms
 ================================================================================
 
-Our tool AMulet 2.2 is able to verify and certify unsigned and signed 
+Our tool TalisMan 1.0 is able to verify and certify unsigned and signed 
 integer multipliers given as AIGs.
 
 For further information we refer to the paper
@@ -19,8 +19,6 @@ In Proc. 31st Intl. Conference on Principles and Practice of Constraint Programm
 `libgmp` (https://gmplib.org/)  
               `lflint` (https://flintlib.org/)  
               `lkissat` (https://github.com/arminbiere/kissat)  
-
-Additionally you need to download the Eigen library from https://gitlab.com/libeigen/eigen and copy the contents of the folder `Eigen` into the respective folder of src/.
 
 # Installation 
 
