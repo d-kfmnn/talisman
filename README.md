@@ -79,5 +79,6 @@ Verbosity Levels
 
 Example Usages
 -------------
-    talisman input.aig -mult-spec
-    talisman input.aig spec.txt
+    talisman examples/abc4.aig -mult-spec
+    talisman examples/abc4.aig -mult-spec -nch -fglm
+
