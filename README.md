@@ -2,8 +2,7 @@
 TalisMan - Trusted Algebraic LInearization of Sub-Circuits with Matrix-based Algorithms using Normalforms
 ================================================================================
 
-Our tool TalisMan 1.0 is able to verify and certify unsigned and signed 
-integer multipliers given as AIGs.
+Our tool TalisMan 1.0 is able to parse and verify AIGs.
 
 For further information we refer to the paper
 
@@ -27,7 +26,7 @@ Use `./configure.sh && make` to configure and build `TalisMan 1.0`.
 
 
 # Usage 
-    talisman <input file> <spec-mode> [proof-logging] [options] 
+    talisman <input file> <spec-mode> [options] 
 
  General Help
  ------------
