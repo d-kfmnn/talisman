@@ -1,0 +1,20 @@
+# Notes: Job names have to be alphanumeric, might contain '_',
+# and cannot start with number (WTF?)
+
+jobs:
+  - template: jobs/build.yml
+    parameters:
+      name: 'OSX_build'
+      pool:
+        vmImage: 'macOs 10.13'
+  - template: jobs/build.yml
+    parameters:
+      name: 'Linux_build'
+      pool:
+        vmImage: 'Ubuntu 16.04'
+
+  - template: jobs/winbuild.yml
+    parameters:
+      name: 'Windows_build'
+      pool:
+        vmImage: 'vs2017-win2016'

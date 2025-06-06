@@ -1,0 +1,14 @@
+jobs:
+- job: ${{ parameters.name }}
+  pool: ${{ parameters.pool }}
+  steps:
+  - script: cmake -H. -BBuild-Debug -DCMAKE_BUILD_TYPE=Debug
+    displayName: 'Configure build'
+
+  - script: cmake --build Build-Debug
+    displayName: 'Build tests'
+  
+  - script: |
+      cd Build-Debug
+      CTEST_OUTPUT_ON_FAILURE=1 ctest -j2
+    displayName: 'Run tests'

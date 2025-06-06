@@ -39,7 +39,7 @@ elif [ $check = undefined ]
 then
   check=no
 fi
-CFLAGS="-Wextra -Wall -std=c++20 -lgmpxx -lflint -lpb -lkissat"
+CFLAGS="-Wextra -Wall -std=c++20 -lgmpxx -I includes/pblib -I includes/kissat/src"
 if [ $debug = yes ]
 then
   CFLAGS="$CFLAGS -g3 -Wall"
@@ -75,20 +75,24 @@ EOF
     [ $? = 42 ] && CFLAGS="$CFLAGS -DHAVEGETRUSAGE"
   fi
   rm -f $tmp*
-cat >$tmp.c <<EOF
-#include <stdio.h>
-int main () {
-  FILE * file = fopen ("configure.sh", "r");
-  if (!file) return 1;
-  int ch = getc_unlocked (file);
-  fclose (file);
-  return ch == '#' ? 42 : 1;
+  cat >$tmp.c <<EOF
+  #include <stdio.h>
+  int main(void) {
+  #ifdef __APPLE__
+    // macOS does not officially support getc_unlocked
+    return 1;
+  #else
+    FILE *f = fopen("/dev/null", "r");
+    if (!f) return 2;
+    int ch = getc_unlocked(f);
+    fclose(f);
+    return (ch == EOF) ? 0 : 0;
+  #endif
 }
 EOF
-  if $CC $CFLAGS $tmp.c -o $tmp.exe 1>/dev/null 2>/dev/null
-  then
-    $tmp.exe 1>/dev/null 2>/dev/null
-    [ $? = 42 ] && CFLAGS="$CFLAGS -DHAVEUNLOCKEDIO"
+
+  if $CC $CFLAGS -o $tmp.exe $tmp.c 2>/dev/null && $tmp.exe >/dev/null 2>&1; then
+    CFLAGS="$CFLAGS -DHAVEUNLOCKEDIO"
   fi
   rm -f $tmp*
 fi

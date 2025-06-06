@@ -2,28 +2,36 @@ CC=@CC@
 CFLAGS=@CFLAGS@
 DEP=@DEP@
 
-
 BUILD_PATH=build/
 SRC_PATH=src/
-SRC      :=  $(wildcard src/*.cpp) \
+SRC      :=  $(wildcard src/*.cpp)
 
 OBJECTS := $(SRC:$(SRC_PATH)%.cpp=$(BUILD_PATH)%.o)
 
-all: aiger talisman
+all: aiger kissat pblib talisman
 
+# Compile AIGER C source
 aiger:
 	gcc -O3 -DNDEBUG -c includes/aiger.c -o includes/aiger.o
-	
+
+kissat:
+	cd includes/kissat && ./configure && $(MAKE)
+
+pblib:
+	cd includes/pblib && cmake -H. -Bbuild && cmake --build build && cd build && make
 
 
+# Compile each .cpp file into a .o object in build/
 $(BUILD_PATH)%.o: $(SRC_PATH)%.cpp
 	$(CC) $(CFLAGS) $(INCLUDE) -c $< -o $@
 
-talisman: $(OBJECTS) aiger 
-	$(CC) $(CFLAGS)  -o  $@ $(OBJECTS) includes/aiger.o  -lkissat -lflint  -lgmp -lpb 
-	
+# Link final binary
+talisman: $(OBJECTS) aiger kissat pblib
+	$(CC) $(CFLAGS) -o $@ $(OBJECTS) includes/aiger.o -lflint -lgmp -L includes/kissat/build -lkissat includes/pblib/build/libpb.a
 
-
+# Clean everything
 clean:
-	rm -f talisman makefile includes/aiger.o \
+	rm -f talisman includes/aiger.o
 	rm -rf build/
+	rm -rf includes/kissat/build
+	rm -rf includes/pblib/build

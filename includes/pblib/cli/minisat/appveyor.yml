@@ -1,0 +1,38 @@
+## Build only, no tests are present ATM
+version: "{build}"
+
+branches:
+  except:
+    - /dev-travis.+/
+
+os:
+  - Visual Studio 2017
+
+init:
+  - git config --global core.autocrlf input
+
+# Win32 and x64 are CMake-compatible solution platform names.
+# This allows us to pass %PLATFORM% to CMake -A.
+platform:
+  - x64
+
+# build Configurations, i.e. Debug, Release, etc.
+configuration:
+  - Debug
+  - Release
+
+#Cmake will autodetect the compiler, but we set the arch
+before_build:
+  - cmake -H. -BBuild -A%PLATFORM%
+
+
+# build with MSBuild
+build:
+  project: Build\MiniSat.sln            # path to Visual Studio solution or project
+  parallel: true                        # enable MSBuild parallel builds
+  verbosity: normal                     # MSBuild verbosity level {quiet|minimal|normal|detailed}
+
+test_script:
+  - cd Build
+  - set CTEST_OUTPUT_ON_FAILURE=1
+  - ctest -j 2 -C %CONFIGURATION%
