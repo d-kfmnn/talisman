@@ -15,14 +15,28 @@ In Proc. 31st Intl. Conference on Principles and Practice of Constraint Programm
 ----------------------------------------------------------------  
   
 # Dependencies:  
-`libgmp` (https://gmplib.org/)  
-              `lflint` (https://flintlib.org/)  
-              `lpb` (https://github.com/master-keying/pblib)  
-              `lkissat` (https://github.com/arminbiere/kissat)  
+
+`TalisMan` relies on `lkissat` (https://github.com/arminbiere/kissat) and `pblib` (https://github.com/master-keying/pblib),
+which are both installed automatically when `TalisMan` is installed as described below. 
+Moreover, `TalisMan` depends on 
+
+  `libgmp` (https://gmplib.org/)  
+  `lflint` (https://flintlib.org/),
+
+which have to be installed separately. 
+
+Note: When `lflint` is installed on MacOS using homebrew, you must explicitly tell the compiler and linker where to find it.
+Usually, it is installed in `/opt/homebrew/opt/flint`. 
+If this is the case, add the additional compiler/linker flags 
+
+    -L/opt/homebrew/opt/flint/lib -I/opt/homebrew/opt/flint/include
+
+to the `CFLAGS` variable in the `configure.sh` script.
+                              
 
 # Installation 
 
-Use `./configure.sh && make` to configure and build `TalisMan 1.0`.
+Use `./configure.sh && make` to configure and build `TalisMan`.
 
 
 # Usage 
