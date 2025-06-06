@@ -26,6 +26,7 @@ OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWA
 #include <type_traits>
 #include <algorithm>
 #include <functional>
+#include <limits>
 
 #include "minisat/mtl/IntTypes.h"
 #include "minisat/mtl/XAlloc.h"
